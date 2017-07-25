@@ -25,8 +25,8 @@ public class CanonicalStringTest {
     }
 
     @Test
-    public void testLeadingTrailingSpaces() {
-        String out = Hide.canonicalString(" HHEE ");
+    public void testLeadingTrailingDots() {
+        String out = Hide.canonicalString(".HHEE.");
         assertTrue("Expected \"EEHH\", but got \""+out+"\"", out.equals("EEHH"));
     }
 
