@@ -8,7 +8,7 @@ public class CanonicalStringTest {
 
     @Test
     public void testNone() {
-        String out = Hide.canonicalString(" ");
+        String out = Hide.canonicalString(".");
         assertTrue("Expected an empty string, but got \""+out+"\"", out.equals(""));
     }
 
@@ -32,7 +32,7 @@ public class CanonicalStringTest {
 
     @Test
     public void testLong() {
-        String out = Hide.canonicalString(" ABC DE  AG  CDEF ABFCD FGH   GAHCFD");
+        String out = Hide.canonicalString(".ABC.DE..AG..CDEF.ABFCD.FGH...GAHCFD");
         assertTrue("Expected \"AAAABBCCCCDDDDEEFFFFGGGHH\", but got \""+out+"\"", out.equals("AAAABBCCCCDDDDEEFFFFGGGHH"));
     }
 }
