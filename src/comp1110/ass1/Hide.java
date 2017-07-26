@@ -124,9 +124,8 @@ public class Hide {
      */
     public static Objective establishSimpleObjective(double difficulty) {
 
-        // FIXME Task 3:  Replace the code below with code that draws from SAMPLE_OBJECTIVES
+        // FIXME Task 3:  Replace the code below with code that draws from SAMPLE_OBJECTIVES -- DONE
         Objective obj = TRIVIAL_OBJECTIVE;
-        //double number1 = (Math.random()*10);
         int number = (int)(Math.random()*3);
         if (difficulty<2.5) obj = SAMPLE_OBJECTIVES[0][number];
         if (2.5<=difficulty && difficulty <5.0) obj = SAMPLE_OBJECTIVES[1][number];
@@ -201,7 +200,7 @@ public class Hide {
      * @param in A string containing only the letters 'A' to 'H' and the EMPTY_CHAR ('.')
      * @return the input string with its characters sorted and spaces removed.
      */
-    public static String canonicalString(String in) { //FIXME TASK 2 DONE
+    public static String canonicalString(String in) { //FIXME TASK 2 -- DONE
         //Scanner input = new Scanner(System.in);
         String r = "";
         for (int i = 0; i < in.length();i ++){
