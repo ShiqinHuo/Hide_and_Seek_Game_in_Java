@@ -106,13 +106,13 @@ public class Hide {
      * objectives provided in SAMPLE_OBJECTIVES.
      *
      * The code should index into the samples according to the difficulty, using the
-     * first arrays for difficulty values less than 0.25, the next for values
-     * less than 0.5, etc.
+     * first arrays for difficulty values less than 2.5/10, the next for values
+     * less than 5.0/10, etc.
      *
      * The code should choose within the arrays randomly, so for a given difficulty
      * level, any one of the three sample values might be used.
      *
-     * For example, if the difficulty level was 0.1, then the first ('EASY') values
+     * For example, if the difficulty level was 1/10, then the first ('EASY') values
      * of each array should be used.   A random number generator should then choose
      * an index between 0 and 2 and set the objective accordingly, so if the randomly
      * generated value was 1, then it would be set to an objective with "DDDD" and 3.
