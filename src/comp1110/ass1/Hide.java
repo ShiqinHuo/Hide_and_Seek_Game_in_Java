@@ -1,5 +1,8 @@
 package comp1110.ass1;
 
+import java.util.Arrays;
+//import java.util.Scanner;
+
 /**
  * This class represents a game of 'hide', which is based directly on a children's game
  * from 'SmartGames' called "Pirates Jr -- Hide and seek"
@@ -120,6 +123,7 @@ public class Hide {
      * @param difficulty A value between 0.0 (easiest) and 10.0 (hardest) specifying the desired level of difficulty.
      */
     public static Objective establishSimpleObjective(double difficulty) {
+
         // FIXME Task 3:  Replace the code below with code that draws from SAMPLE_OBJECTIVES
         return TRIVIAL_OBJECTIVE;
     }
@@ -187,9 +191,16 @@ public class Hide {
      * @param in A string containing only the letters 'A' to 'H' and the EMPTY_CHAR ('.')
      * @return the input string with its characters sorted and spaces removed.
      */
-    public static String canonicalString(String in) {
-        // FIXME Task 2: implement code that correctly returns a canonical string according to the comment above.
-        return in;
+    public static String canonicalString(String in) { //FIXME TASK 2 DONE
+        //Scanner input = new Scanner(System.in);
+        String r = "";
+        for (int i = 0; i < in.length();i ++){
+            if (in.charAt(i) != '.') r += in.charAt(i);
+        }
+        char[] chars = r.toCharArray();
+        Arrays.sort(chars);
+        String sorted = new String(chars);
+        return sorted;
     }
 
 
