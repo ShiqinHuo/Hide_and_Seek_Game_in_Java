@@ -117,7 +117,7 @@ public class Hide {
      * an index between 0 and 2 and set the objective accordingly, so if the randomly
      * generated value was 1, then it would be set to an objective with "DDDD" and 3.
      *
-     * @param difficulty The desired difficulty of the game, between 0 and 10.
+     * @param difficulty A value between 0.0 (easiest) and 10.0 (hardest) specifying the desired level of difficulty.
      */
     public static Objective establishSimpleObjective(double difficulty) {
         // FIXME Task 3:  Replace the code below with code that draws from SAMPLE_OBJECTIVES
@@ -141,7 +141,7 @@ public class Hide {
      * This requires a deeper understanding of the problem, and some way of determining
      * what makes a particular objective difficult or easy.
      *
-     * @param difficulty The desired difficulty of the game, between 0 and 10.
+     * @param difficulty A value between 0.0 (easiest) and 10.0 (hardest) specifying the desired level of difficulty.
      */
     public static Objective establishInterestingObjective(double difficulty) {
         // FIXME Task 7: Replace this code with a good objective generator that does not draw from a simple set of samples
