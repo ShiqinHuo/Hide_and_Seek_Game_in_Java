@@ -125,7 +125,14 @@ public class Hide {
     public static Objective establishSimpleObjective(double difficulty) {
 
         // FIXME Task 3:  Replace the code below with code that draws from SAMPLE_OBJECTIVES
-        return TRIVIAL_OBJECTIVE;
+        Objective obj = TRIVIAL_OBJECTIVE;
+        //double number1 = (Math.random()*10);
+        int number = (int)(Math.random()*3);
+        if (difficulty<2.5) obj = SAMPLE_OBJECTIVES[0][number];
+        if (2.5<=difficulty && difficulty <5.0) obj = SAMPLE_OBJECTIVES[1][number];
+        if (difficulty>=5.0 && difficulty <7.5) obj = SAMPLE_OBJECTIVES[2][number];
+        if (difficulty>=7.5 && difficulty <10.0) obj = SAMPLE_OBJECTIVES[3][number];
+        return obj;
     }
 
 
@@ -149,6 +156,9 @@ public class Hide {
      */
     public static Objective establishInterestingObjective(double difficulty) {
         // FIXME Task 7: Replace this code with a good objective generator that does not draw from a simple set of samples
+
+
+
         return null;
     }
 
