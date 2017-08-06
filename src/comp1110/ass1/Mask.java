@@ -1,7 +1,5 @@
 package comp1110.ass1;
 
-//import com.sun.deploy.util.ArrayUtil;
-//import com.sun.tools.javac.util.ArrayUtils;
 
 /**
  * An enumeration representing the four masks in the game hide.
@@ -18,9 +16,11 @@ package comp1110.ass1;
  */
 public enum Mask {
     W(0),X(1),Y(2),Z(3);     // These do not use any state (or constructors).  You may want to add them.
+
 //use id to present:
 //https://stackoverflow.com/questions/15380243/how-to-retrieve-enum-name-using-the-id
-    private int id;
+    int id;
+    Mask(){}
     Mask(int id){
         this.id = id;
     }
@@ -70,6 +70,8 @@ public enum Mask {
      * @return A set of indices corresponding to the board positions that would be covered by this mask
      */
     public int[] getIndices(char placement) {
+        if(placement==' ')return new int[0];
+        //System.out.println("hereee"+placement);
         //
         // FIXME Task 4 -- Done! : implement code that correctly creates an array of integers specifying the indicies of masked pieces
         int index, accumulate = 0;
@@ -87,6 +89,8 @@ public enum Mask {
         else {accumulate = 27;index = placement - 'M';}
 
         for (int i = 0,j = 0; i <= 8; i++){ // remove the blank positions in the mask
+            System.out.println(id);
+            System.out.println(index);
             if (i!=position[id][index][0] && (i!=position[id][index][1])) {
                 temp[j] = i;
                 j++;
@@ -123,33 +127,32 @@ public enum Mask {
      */
     public static String maskString(String maskPositions, String input) {
         // FIXME Task 5: implement code that correctly creates a masked string according to the comment above
+        System.out.println(maskPositions);
         char[] posArray = maskPositions.toCharArray();
         char[] inArray = input.toCharArray();
-        int[] masked_W = getIndices((posArray[0]));
-        int[] masked_X = getIndices((posArray[1]));
-        int[] masked_Y = getIndices((posArray[2]));
-        int[] masked_Z = getIndices((posArray[3]));
-
-        for (int i = 0; i < 9; i++) {
-            for (int j = 0; j < 7; j++) {
-                if (masked_W[j] == inArray[i]) inArray[i] = '.';
-            }
-        }
-        for (int i = 9; i < 18; i++) {
-            for (int j = 0; j < 7; j++) {
-                if (masked_X[j] == inArray[i]) inArray[i] = '.';
-            }
-        }
-        for (int i = 18; i < 27; i++) {
-            for (int j = 0; j < 7; j++) {
-                if (masked_Y[j] == inArray[i]) inArray[i] = '.';
-            }
-        }
-        for (int i = 27; i < 36; i++) {
-            for (int j = 0; j < 7; j++) {
-                if (masked_Z[j] == inArray[i]) inArray[i] = '.';
-            }
-        }//https://stackoverflow.com/questions/7655127/how-to-convert-a-char-array-back-to-a-string
+        int[] masked_W = W.getIndices((posArray[0]));
+       // System.out.println("bu"+posArray[1]);
+        int[] masked_X = X.getIndices((posArray[1]));
+        int[] masked_Y = Y.getIndices((posArray[2]));
+        int[] masked_Z = Z.getIndices((posArray[3]));
+        if(masked_W.length!=0){
+        for (int j = 0; j < 7; j++) {
+                int current = masked_W[j];
+                inArray[current] = '.';
+        }}
+        if(masked_X.length!=0){
+        for (int j = 0; j < 7; j++) {
+            int current = masked_X[j];
+            inArray[current] = '.';        }}
+        if(masked_Y.length!=0){
+        for (int j = 0; j < 7; j++) {
+                int current = masked_Y[j];
+                inArray[current] = '.';
+        }}
+        if(masked_Z.length!=0){
+        for (int j = 0; j < 7; j++) {
+                int current = masked_Z[j];
+                inArray[current] = '.';        }}//https://stackoverflow.com/questions/7655127/how-to-convert-a-char-array-back-to-a-string
         return new String(inArray);
     }
 }
