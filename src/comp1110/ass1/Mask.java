@@ -14,8 +14,19 @@ package comp1110.ass1;
  * http://docs.oracle.com/javase/tutorial/java/javaOO/enum.html
  */
 public enum Mask {
-    W,X,Y,Z;     // These do not use any state (or constructors).  You may want to add them.
-
+    W(0),X(1),Y(2),Z(3);     // These do not use any state (or constructors).  You may want to add them.
+//use id to present:
+    private final int id;
+//Always exist two blanks in these 4 masks. Below is the blank index array for 16 kinds of situations
+//here we only consider the first quadrant, similar for other quadrants.
+    static int[][][] position = {
+            {{2,7},{3,8},{1,6},{0,5}}, // W : A B C D
+            {{1,4},{4,5},{4,7},{3,4}}, // X : A B C D
+            {{0,8},{2,6},{0,8},{2,6}}, // Y : A B C D
+            {{1,7},{3,5},{1,7},{3,5}}  // Z : A B C D
+    };
+    Mask(int iden){
+        this.id = iden;}
     /**
      * Return indicies corresponding to which board squares would be covered
      * by this mask given the provided placement.
@@ -36,9 +47,8 @@ public enum Mask {
      *
      * Examples:
      *
-     *   Given the placement character 'A', the mask 'W' would return the indices: {0,1,3,4,5,6,8}.
-     *   Given the placement character 'O', the mask 'X' would return the indices: {27,28,29,30,32,33,35}.
-     *
+     *   Given the placement character 'A', the mask 'W' would return the indices: {0,1,3,4,5,6,8}. 2 7 -- H mask
+     *   Given the placement character 'O', the mask 'X' would return the indices: {27,28,29,30,32,33,35}. 4 8-- U mask
      *
      * Hint: You can associate values with each entry in the enum using a constructor,
      * so you could use that to somehow encode the properties of each of the four masks.
@@ -54,7 +64,30 @@ public enum Mask {
      */
     int[] getIndices(char placement) {
         // FIXME Task 4: implement code that correctly creates an array of integers specifying the indicies of masked pieces
-        return null;
+        int index, accumulate = 0;
+        int[] temp = new int[7];
+
+        if (placement>='A' && placement <='D')
+            index = placement - 'A';
+
+        else if (placement >= 'E' && placement <= 'H'){
+            accumulate = 9; index = placement - 'E';}
+
+        else if (placement >= 'I' && placement <= 'L'){
+            accumulate = 18;index = placement - 'I';}
+
+        else {accumulate = 27;index = placement - 'M';}
+
+        for (int i = 0,j = 0; i <= 8; i++){ // remove the blank positions in the mask
+            if (i!=position[id][index][0] && (i!=position[id][index][1])) {
+                temp[j] = i;
+                j++;
+            }
+        }
+        for (int k = 0; k< temp.length;k++){
+            temp[k]+=accumulate;
+        }//https://stackoverflow.com/questions/15933596/trying-to-add-1-to-an-integer-array-for-every-value-java
+        return temp;
     }
 
     /**

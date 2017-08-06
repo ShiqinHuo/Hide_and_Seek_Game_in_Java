@@ -1,8 +1,6 @@
 package comp1110.ass1;
-
 import java.util.Arrays;
 //import java.util.Scanner;
-
 /**
  * This class represents a game of 'hide', which is based directly on a children's game
  * from 'SmartGames' called "Pirates Jr -- Hide and seek"
@@ -208,8 +206,8 @@ public class Hide {
         }
         char[] chars = r.toCharArray();
         Arrays.sort(chars);
-        String sorted = new String(chars);
-        return sorted;
+        //String sorted = new String(chars);
+        return new String(chars);
     }
 
 
@@ -237,7 +235,6 @@ public class Hide {
         if (solution == null) setSolution();
             return solution;
     }
-
 
     /**
      * Establish the solution to this game.
