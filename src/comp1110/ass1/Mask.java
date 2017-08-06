@@ -152,7 +152,7 @@ public enum Mask {
         if(masked_Z.length!=0){
         for (int j = 0; j < 7; j++) {
                 int current = masked_Z[j];
-                inArray[current] = '.';        }}//https://stackoverflow.com/questions/7655127/how-to-convert-a-char-array-back-to-a-string
+                inArray[current] = '.';  }}//https://stackoverflow.com/questions/7655127/how-to-convert-a-char-array-back-to-a-string
         return new String(inArray);
     }
 }
