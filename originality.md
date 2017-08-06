@@ -7,10 +7,11 @@ Your assignment **will not** be marked unless you have completed this statement.
 
 I declare that the work I have submitted for assignment one is entirely my own work, with the following documented exceptions:
 
-* The idea of <...> came from a discussion with <...>
+* The idea of <how to classify the mask positions in class Mask> came from a discussion with <Wenjun Yang u6251843>
 
 * The code in class <Hide> uses an idea suggested by <https://stackoverflow.com/questions/605891/sort-a-single-string-in-java>
 * The code in class <Hide> uses an idea suggested by <https://www.java-tips.org/java-se-tips-100019/24-java-lang/2332-replace-or-remove-character-in-a-string.html>
 * The code in class <Hide> uses an idea suggested by <Introduction to Java Programming>
+* The code in class <Mask> uses an idea suggested by <https://stackoverflow.com/questions/15933596/trying-to-add-1-to-an-integer-array-for-every-value-java>
 
 Signed: Shiqin Huo (u5949730)
