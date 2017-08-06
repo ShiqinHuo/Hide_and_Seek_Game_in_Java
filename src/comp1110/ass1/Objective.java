@@ -32,7 +32,6 @@ public class Objective {
         this.maskWConstraint = maskWConstraint;
     }
 
-
     /** @return the mask constraint */
     public int getMaskWConstraint() { return maskWConstraint; }
 
@@ -40,7 +39,6 @@ public class Objective {
     /** @return the string describing the shapes that are to be exposed */
     public String getExposed() { return exposed; }
 
-    
     /** @return a string representing the objective */
     public String toString() {
         if (maskWConstraint > -1)
