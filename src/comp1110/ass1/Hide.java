@@ -223,8 +223,8 @@ public class Hide {
      */
     public String[] getSolutions() {
        // FIXME Task 6: replace this code with code that determines all solutions for this game's objective
-        System.out.println(getObjective().getExposed()); //LION:A; CAT:B; RAT:C; SHEEP:D; SQUIRE:E; COW:F; DOG:G; RABBIT:H
-        List<String> ans = new ArrayList<String>();
+        //System.out.println(getObjective().getExposed()); //LION:A; CAT:B; RAT:C; SHEEP:D; SQUIRE:E; COW:F; DOG:G; RABBIT:H
+        List<String> ans = new ArrayList<>();
         String in =".ABC.DE..AG..CDEF.ABFCD.FGH...GAHCFD";
         String[][] input = {
                 {"A","B","C","D"},
@@ -237,7 +237,6 @@ public class Hide {
                     for (int m = 0; m < 4; m++) {
                         String[] method = new String[24];//24 kinds combinations for 4 certain chars
                         String choice1 = input[0][i];
-                        //System.out.println(choice1);
                         String choice2 = input[1][j];
                         String choice3 = input[2][k];
                         String choice4 = input[3][m];
@@ -310,7 +309,7 @@ public class Hide {
                 }
             }
         }
-        System.out.println(ans);
+        //System.out.println(ans);
         String[] stringArray = ans.toArray(new String[ans.size()]);
         Arrays.sort(stringArray);
         return stringArray;}
