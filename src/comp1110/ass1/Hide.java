@@ -222,15 +222,17 @@ public class Hide {
      * there are no solutions, the array should be empty (not null).
      */
     public String[] getSolutions() {
-       // FIXME Task 6: replace this code with code that determines all solutions for this game's objective
-        //System.out.println(getObjective().getExposed()); //LION:A; CAT:B; RAT:C; SHEEP:D; SQUIRE:E; COW:F; DOG:G; RABBIT:H
-        List<String> ans = new ArrayList<>();
-        String in =".ABC.DE..AG..CDEF.ABFCD.FGH...GAHCFD";
+        // FIXME Task 6: replace this code with code that determines all solutions for this game's objective
+        //System.out.println(getObjective().getExposed());
+        String in =".ABC.DE..AG..CDEF.ABFCD.FGH...GAHCFD";//According to the given board.
+        //LION:A; CAT:B; RAT:C; SHEEP:D; SQUIRE:E; COW:F; DOG:G; RABBIT:H
         String[][] input = {
                 {"A","B","C","D"},
                 {"E","F","G","H"},
                 {"I","J","K","L"},
                 {"M","N","O","P"}};
+        List<String> ans = new ArrayList<>(); //The length is undefined, so here ArrayList is used.
+        //https://stackoverflow.com/questions/15039519/how-to-dynamically-add-elements-to-string-array
         for (int i=0; i<4;i++) {
             for (int j = 0; j < 4; j++) {
                 for (int k = 0; k < 4; k++) {
@@ -303,8 +305,8 @@ public class Hide {
                                 }
                                 String same = new String(chars);
                                 if (!ans.contains(same)) ans.add(method[n]);
-                            }//https://stackoverflow.com/questions/15039519/how-to-dynamically-add-elements-to-string-array
-                        }
+                            }//https://stackoverflow.com/questions/224311/cleanest-way-to-toggle-a-boolean-variable-in-java
+                        }//https://stackoverflow.com/questions/15039519/how-to-dynamically-add-elements-to-string-array
                     }
                 }
             }

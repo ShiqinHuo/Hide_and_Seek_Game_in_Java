@@ -7,7 +7,6 @@ public class Objective {
     private String exposed;        // The set of shapes that must be left exposed
     private int maskWConstraint;   // A constraint on the rotation of mask 'W', if any
 
-
     /**
      * Constructor with no rotation constraint provided.
      *
@@ -17,7 +16,6 @@ public class Objective {
         this.exposed = exposed;
         this.maskWConstraint = -1;
     }
-
 
     /**
      * Constructor with a rotation constraint on mask 'W' provided.
