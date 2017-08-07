@@ -89,8 +89,8 @@ public enum Mask {
         else {accumulate = 27;index = placement - 'M';}
 
         for (int i = 0,j = 0; i <= 8; i++){ // remove the blank positions in the mask
-            System.out.println(id);
-            System.out.println(index);
+            //System.out.println("hhhhhhhhh"+this);
+            //System.out.println(index);
             if (i!=position[id][index][0] && (i!=position[id][index][1])) {
                 temp[j] = i;
                 j++;
@@ -127,7 +127,7 @@ public enum Mask {
      */
     public static String maskString(String maskPositions, String input) {
         // FIXME Task 5: implement code that correctly creates a masked string according to the comment above
-        System.out.println(maskPositions);
+        //System.out.println(maskPositions);
         char[] posArray = maskPositions.toCharArray();
         char[] inArray = input.toCharArray();
         int[] masked_W = W.getIndices((posArray[0]));

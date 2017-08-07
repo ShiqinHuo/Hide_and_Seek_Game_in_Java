@@ -1,5 +1,7 @@
 package comp1110.ass1;
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 //import java.util.Scanner;
 /**
  * This class represents a game of 'hide', which is based directly on a children's game
@@ -220,9 +222,98 @@ public class Hide {
      * there are no solutions, the array should be empty (not null).
      */
     public String[] getSolutions() {
-        // FIXME Task 6: replace this code with code that determines all solutions for this game's objective
-        return new String[1];
-    }
+       // FIXME Task 6: replace this code with code that determines all solutions for this game's objective
+        System.out.println(getObjective().getExposed()); //LION:A; CAT:B; RAT:C; SHEEP:D; SQUIRE:E; COW:F; DOG:G; RABBIT:H
+        List<String> ans = new ArrayList<String>();
+        String in =".ABC.DE..AG..CDEF.ABFCD.FGH...GAHCFD";
+        String[][] input = {
+                {"A","B","C","D"},
+                {"E","F","G","H"},
+                {"I","J","K","L"},
+                {"M","N","O","P"}};
+        for (int i=0; i<4;i++) {
+            for (int j = 0; j < 4; j++) {
+                for (int k = 0; k < 4; k++) {
+                    for (int m = 0; m < 4; m++) {
+                        String[] method = new String[24];//24 kinds combinations for 4 certain chars
+                        String choice1 = input[0][i];
+                        //System.out.println(choice1);
+                        String choice2 = input[1][j];
+                        String choice3 = input[2][k];
+                        String choice4 = input[3][m];
+                        //24 kinds combinations for 4 certain chars
+                        method[0] = choice1 + choice2 + choice3 + choice4;
+                        method[1] = choice1 + choice2 + choice4 + choice3;
+                        method[2] = choice1 + choice3 + choice2 + choice4;
+                        method[3] = choice1 + choice3 + choice4 + choice2;
+                        method[4] = choice1 + choice4 + choice2 + choice3;
+                        method[5] = choice1 + choice4 + choice3 + choice2;
+                        method[6] = choice2 + choice1 + choice3 + choice4;
+                        method[7] = choice2 + choice1 + choice4 + choice3;
+                        method[8] = choice2 + choice3 + choice1 + choice4;
+                        method[9] = choice2 + choice3 + choice4 + choice1;
+                        method[10] = choice2 + choice4 + choice3 + choice1;
+                        method[11] = choice2 + choice4 + choice1 + choice3;
+                        method[12] = choice3 + choice1 + choice2 + choice4;
+                        method[13] = choice3 + choice1 + choice4 + choice2;
+                        method[14] = choice3 + choice2 + choice1 + choice4;
+                        method[15] = choice3 + choice2 + choice4 + choice1;
+                        method[16] = choice3 + choice4 + choice1 + choice2;
+                        method[17] = choice3 + choice4 + choice2 + choice1;
+                        method[18] = choice4 + choice1 + choice2 + choice3;
+                        method[19] = choice4 + choice1 + choice3 + choice2;
+                        method[20] = choice4 + choice2 + choice1 + choice3;
+                        method[21] = choice4 + choice2 + choice3 + choice1;
+                        method[22] = choice4 + choice3 + choice1 + choice2;
+                        method[23] = choice4 + choice3 + choice2 + choice1;
+                        // finished 24-ele method for each chosen 4 chars
+                        for (int n = 0; n < 24; n++) {
+                            String sorted;
+                            sorted = canonicalString(Mask.maskString(method[n], in));
+                            if (sorted.equals(getObjective().getExposed())){
+                                char[] chars = new char[4];
+                                chars[0] = method[n].charAt(0);
+                                chars[1] = method[n].charAt(1);
+                                chars[2] = method[n].charAt(2);
+                                chars[3] = method[n].charAt(3);
+                                // We notice that mask Z and mask Y is symmetric so there exist duplicates in the character-string presenting.
+                                // For instance,
+                                // a four-char string "OFIA" represents the same solution with what "OFKA", "OFIC", "OFKC" do.
+                                // Similarly, a four-char string "JMEB" represents the same solution with what "JMGB", "JMED", "JMGD" do.
+                                // Generally , N/P, J/L, F/H, B/D, M/O, I/K, E/G, A/C can be replaced by their counterpart in each pair respectively,
+                                // For the place whose index is 2 (represents mask Y) or 3 (represents mask Y) in the 4-char string
+                                switch (chars[2]){
+                                    case 'D': chars[2] ='B';break;
+                                    case 'C': chars[2] ='A';break;
+                                    case 'G': chars[2] ='E';break;
+                                    case 'K': chars[2] ='I';break;
+                                    case 'O': chars[2] ='M';break;
+                                    case 'H': chars[2] ='F';break;
+                                    case 'L': chars[2] ='J';break;
+                                    case 'P': chars[2] ='N';break;
+                                }
+                                switch (chars[3]) {
+                                    case 'D': chars[3] ='B';break;
+                                    case 'C': chars[3] ='A';break;
+                                    case 'G': chars[3] ='E';break;
+                                    case 'K': chars[3] ='I';break;
+                                    case 'O': chars[3] ='M';break;
+                                    case 'H': chars[3] ='F';break;
+                                    case 'L': chars[3] ='J';break;
+                                    case 'P': chars[3] ='N';break;
+                                }
+                                String same = new String(chars);
+                                if (!ans.contains(same)) ans.add(method[n]);
+                            }//https://stackoverflow.com/questions/15039519/how-to-dynamically-add-elements-to-string-array
+                        }
+                    }
+                }
+            }
+        }
+        System.out.println(ans);
+        String[] stringArray = ans.toArray(new String[ans.size()]);
+        Arrays.sort(stringArray);
+        return stringArray;}
 
 
     /**
@@ -232,6 +323,7 @@ public class Hide {
      * @return A string representing the solution to this habitat.
      */
     public String getSolution() {
+
         if (solution == null) setSolution();
             return solution;
     }
