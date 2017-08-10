@@ -1,8 +1,13 @@
 package comp1110.ass1;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
-//import java.util.Scanner;
+
 /**
  * This class represents a game of 'hide', which is based directly on a children's game
  * from 'SmartGames' called "Pirates Jr -- Hide and seek"
@@ -72,9 +77,40 @@ public class Hide {
             {new Objective("CCFF"), new Objective("CCDG"  ),   new Objective("AABEF")},
     };
 
-
     private Objective objective;                  // the objective of this instance of the game
     private String solution;                      // the solution to the current game
+
+// Generate all the one-solution objective situations as a file called "alloneSolutions.text" in the comp1110-ass1 directory
+// Here we select 80 samples as the fresh objectives and divide them into 8 levels with 10 objectives in each level:
+
+    public static final Objective[][] OBJECTIVES = {
+            /* level 1 */
+            {new Objective("AC",0),new Objective("CC",3),new Objective("CD",3),
+             new Objective("CEH",1),new Objective("DDF",0),new Objective("EFFG",1),
+             new Objective("AAD",0),new Objective("CEF",3),new Objective("CCE",3),
+             new Objective("BDG",0)},
+            /* level 2 */
+            {new Objective("ABGG"),new Objective("BCCCD"),new Objective("BCDFF"), new Objective("BCCGG"),new Objective("CFGGH"),
+             new Objective("BCDEG"), new Objective("BCDDE"),new Objective("BCDGG"), new Objective("BCCCF"),new Objective("BCCEH")},
+            /* level 3 */
+            {new Objective(" AAADFFF"),new Objective(" AAADGHH"),new Objective(" AAAEGHH"),new Objective(" AAABEGG"),new Objective(" ACCCDGH"),
+             new Objective("AAAADFH"), new Objective("AAAADGH"), new Objective("AAAEGGH"),new Objective(" AAACDDH"),new Objective("AAABEFG")},
+            /* level 4 */
+            {new Objective("AAAFHH"),new Objective("AAAFFH"),new Objective("AAADFF"), new Objective("AAACEH"),new Objective("AAABFH"),
+             new Objective("AAADFH"), new Objective("AAACFH"),new Objective("AAAFGG"), new Objective("AAACHH"),new Objective("AAACEF")},
+            /* level 5 */
+            {new Objective("ABCDEHH"),new Objective("ABFFFGH"),new Objective("ABDEFGG"), new Objective("ABCGGHH"),new Objective("ABCDGHH"),
+             new Objective("ACCCDDD"), new Objective("ABFFFGG"),new Objective("ABDEEGH"), new Objective("ABCEEGH"),new Objective("ABEFFGG")},
+            /* level 6 */
+            {new Objective("AACDDFFG"),new Objective("AABBDEGH"),new Objective("AABBDEFG"), new Objective("AAAEFGGH"),new Objective("AAACDDHH"),
+             new Objective("AACDDFFF"), new Objective("AABBDEGG"),new Objective("AAAEFGHH"), new Objective("AAAEFFGH"),new Objective("AAACDDGH")},
+            /* level 7 */
+            {new Objective("BBDDEFGG"),new Objective("BCCDEGHH"),new Objective("CCDDDFFG"), new Objective("CCDDFFGG"),new Objective("ACDEFFGG"),
+             new Objective("BBDEEGGH"), new Objective("BCDDEFGG"),new Objective("CCDDFFFG"), new Objective("ACEFFGGH"),new Objective("ACCDDGGH")},
+            /* level 8 */
+            {new Objective("BDEEGGGH"),new Objective("BBCEFGGH"),new Objective("BBCDDEGG"), new Objective("ACCDDFGH"),new Objective("ABDDEGGH"),
+             new Objective("BDDEFGGG"), new Objective("BBCEFFGH"),new Objective("BBCDEFGG"), new Objective("ABEFFGGG"),new Objective("AACDDFFH")},
+    };
 
 
     /**
@@ -91,7 +127,6 @@ public class Hide {
             objective = establishSimpleObjective(difficulty);
     }
 
-
     /**
      * Constructor for a game, given a particular objective for that game
      *
@@ -102,7 +137,6 @@ public class Hide {
     public Hide(Objective objective) {
         this.objective = objective;
     }
-
 
     /**
      * Set the game's objective using the given difficulty level and the sample
@@ -134,7 +168,6 @@ public class Hide {
         return obj;
     }
 
-
     /**
      * Set the game's objective using the given difficulty level.
      *
@@ -154,12 +187,250 @@ public class Hide {
      * @param difficulty A value between 0.0 (easiest) and 10.0 (hardest) specifying the desired level of difficulty.
      */
     public static Objective establishInterestingObjective(double difficulty) {
+
         // FIXME Task 7: Replace this code with a good objective generator that does not draw from a simple set of samples
-
-
-
-        return null;
+        Objective obj = TRIVIAL_OBJECTIVE;
+        int number = (int)(Math.random()*10);
+        if (difficulty<10/8) obj = OBJECTIVES[0][number];
+        if (10/8<=difficulty && difficulty <20/8) obj = OBJECTIVES[1][number];
+        if (difficulty>=20/8 && difficulty <30/8) obj = OBJECTIVES[2][number];
+        if (difficulty>=30/8 && difficulty <40/8) obj = OBJECTIVES[3][number];
+        if (difficulty>=40/8 && difficulty <50/8) obj = OBJECTIVES[4][number];
+        if (difficulty>=50/8 && difficulty <60/8) obj = OBJECTIVES[5][number];
+        if (difficulty>=60/8 && difficulty <70/8) obj = OBJECTIVES[6][number];
+        if (difficulty>=70/8 && difficulty <10) obj = OBJECTIVES[7][number];
+        return obj;
     }
+
+//Here is my another idea to create a file which contains all the correct objectives.
+//Therefore we need to use the I/O to process this file and generate the target randomly
+// in terms of the length of the objectives(represents the difficulty).
+//https://stackoverflow.com/questions/4716503/reading-a-plain-text-file-in-java
+
+/**    BufferedReader br = new BufferedReader(new FileReader("alloneSolutions.txt"));
+    try {
+        StringBuilder sb = new StringBuilder();
+        String line = br.readLine();
+
+        while (line != null) {
+            sb.append(line);
+            sb.append(System.lineSeparator());
+            line = br.readLine();
+        }
+        String everything = sb.toString();
+    } finally {
+        br.close();
+    }*/
+
+
+
+// Find out all the one-solution results (print out and store in the alloneSolutions.text)
+
+// 8 objectives
+    public static void main(String[] args) {
+        HashMap<String,Boolean> hashMap = new HashMap<String,Boolean>();
+        for(char a = 'A';a<='H';a++)
+            for(char b = 'A';b<='H';b++)
+                for(char c = 'A';c<='H';c++)
+                    for(char d = 'A';d<='H';d++)
+                        for(char e = 'A';e<='H';e++)
+                            for(char f = 'A';f<='H';f++)
+                                for(char g = 'A';g<='H';g++)
+                                    for(char h = 'A';h<='H';h++){
+                                        String result = ""+a+b+c+d+e+f+g+h;
+                                        char[] chars = result.toCharArray();
+                                        Arrays.sort(chars);
+                                        result = new String(chars);
+                                        if(hashMap.containsKey(result))continue;
+                                        else if(solutions(result).length==1) {hashMap.put(result,true);System.out.println(result);}
+                                        else hashMap.put(result,false);
+                                    }
+// 7 objectives
+        for(char a = 'A';a<='H';a++)
+            for(char b = 'A';b<='H';b++)
+                for(char c = 'A';c<='H';c++)
+                    for(char d = 'A';d<='H';d++)
+                        for(char e = 'A';e<='H';e++)
+                            for(char f = 'A';f<='H';f++)
+                                for(char g = 'A';g<='H';g++)
+                                    {
+                                        String result = ""+a+b+c+d+e+f+g;
+                                        char[] chars = result.toCharArray();
+                                        Arrays.sort(chars);
+                                        result = new String(chars);
+                                        if(hashMap.containsKey(result))continue;
+                                        else if(solutions(result).length==1) {hashMap.put(result,true);System.out.println(result);}
+                                        else hashMap.put(result,false);
+                                    }
+// 6 objectives
+        for(char a = 'A';a<='H';a++)
+            for(char b = 'A';b<='H';b++)
+                for(char c = 'A';c<='H';c++)
+                    for(char d = 'A';d<='H';d++)
+                        for(char e = 'A';e<='H';e++)
+                            for(char f = 'A';f<='H';f++)
+                            {
+                                String result = ""+a+b+c+d+e+f;
+                                char[] chars = result.toCharArray();
+                                Arrays.sort(chars);
+                                result = new String(chars);
+                                if(hashMap.containsKey(result))continue;
+                                else if(solutions(result).length==1) {hashMap.put(result,true);System.out.println(result);}
+                                else hashMap.put(result,false);
+                            }
+// 5 objectives
+        for(char a = 'A';a<='H';a++)
+            for(char b = 'A';b<='H';b++)
+                for(char c = 'A';c<='H';c++)
+                    for(char d = 'A';d<='H';d++)
+                        for(char e = 'A';e<='H';e++)
+                            {
+                                String result = ""+a+b+c+d+e;
+                                char[] chars = result.toCharArray();
+                                Arrays.sort(chars);
+                                result = new String(chars);
+                                if(hashMap.containsKey(result))continue;
+                                else if(solutions(result).length==1) {hashMap.put(result,true);System.out.println(result);}
+                                else hashMap.put(result,false);
+                            }
+// 4 objectives
+        for(char a = 'A';a<='H';a++)
+            for(char b = 'A';b<='H';b++)
+                for(char c = 'A';c<='H';c++)
+                    for(char d = 'A';d<='H';d++)
+                        {
+                            String result = ""+a+b+c+d;
+                            char[] chars = result.toCharArray();
+                            Arrays.sort(chars);
+                            result = new String(chars);
+                            if(hashMap.containsKey(result))continue;
+                            else if(solutions(result).length==1) {hashMap.put(result,true);System.out.println(result);}
+                            else hashMap.put(result,false);
+                        }
+// 3 objectives
+        for(char a = 'A';a<='H';a++)
+            for(char b = 'A';b<='H';b++)
+                for(char c = 'A';c<='H';c++)
+                    {
+                        String result = ""+a+b+c;
+                        char[] chars = result.toCharArray();
+                        Arrays.sort(chars);
+                        result = new String(chars);
+                        if(hashMap.containsKey(result))continue;
+                        else if(solutions(result).length==1) {hashMap.put(result,true);System.out.println(result);}
+                        else hashMap.put(result,false);
+                    }
+// 2 objectives
+        for(char a = 'A';a<='H';a++)
+            for(char b = 'A';b<='H';b++)
+                {
+                    String result = ""+a+b;
+                    char[] chars = result.toCharArray();
+                    Arrays.sort(chars);
+                    result = new String(chars);
+                    if(hashMap.containsKey(result))continue;
+                    else if(solutions(result).length==1) {hashMap.put(result,true);System.out.println(result);}
+                    else hashMap.put(result,false);
+                }
+
+    }
+
+// Since the method in task 6 "getSolutions" is non-static, it cannot be used in the task 7 which is static
+//  To deal with that, I rewrite the similar method "solutions" which is static, specially.
+    public static String[] solutions(String s) {
+        String in =".ABC.DE..AG..CDEF.ABFCD.FGH...GAHCFD";//According to the given board.
+        //LION:A; CAT:B; RAT:C; SHEEP:D; SQUIRE:E; COW:F; DOG:G; RABBIT:H
+        String[][] input = {
+                {"A","B","C","D"},
+                {"E","F","G","H"},
+                {"I","J","K","L"},
+                {"M","N","O","P"}};
+        List<String> ans = new ArrayList<>(); //The length is undefined, so here ArrayList is used.
+        //https://stackoverflow.com/questions/15039519/how-to-dynamically-add-elements-to-string-array
+        for (int i=0; i<4;i++) {
+            for (int j = 0; j < 4; j++) {
+                for (int k = 0; k < 4; k++) {
+                    for (int m = 0; m < 4; m++) {
+                        String[] method = new String[24];//24 kinds combinations for 4 certain chars
+                        String choice1 = input[0][i];
+                        String choice2 = input[1][j];
+                        String choice3 = input[2][k];
+                        String choice4 = input[3][m];
+                        //24 kinds combinations for 4 certain chars
+                        method[0] = choice1 + choice2 + choice3 + choice4;
+                        method[1] = choice1 + choice2 + choice4 + choice3;
+                        method[2] = choice1 + choice3 + choice2 + choice4;
+                        method[3] = choice1 + choice3 + choice4 + choice2;
+                        method[4] = choice1 + choice4 + choice2 + choice3;
+                        method[5] = choice1 + choice4 + choice3 + choice2;
+                        method[6] = choice2 + choice1 + choice3 + choice4;
+                        method[7] = choice2 + choice1 + choice4 + choice3;
+                        method[8] = choice2 + choice3 + choice1 + choice4;
+                        method[9] = choice2 + choice3 + choice4 + choice1;
+                        method[10] = choice2 + choice4 + choice3 + choice1;
+                        method[11] = choice2 + choice4 + choice1 + choice3;
+                        method[12] = choice3 + choice1 + choice2 + choice4;
+                        method[13] = choice3 + choice1 + choice4 + choice2;
+                        method[14] = choice3 + choice2 + choice1 + choice4;
+                        method[15] = choice3 + choice2 + choice4 + choice1;
+                        method[16] = choice3 + choice4 + choice1 + choice2;
+                        method[17] = choice3 + choice4 + choice2 + choice1;
+                        method[18] = choice4 + choice1 + choice2 + choice3;
+                        method[19] = choice4 + choice1 + choice3 + choice2;
+                        method[20] = choice4 + choice2 + choice1 + choice3;
+                        method[21] = choice4 + choice2 + choice3 + choice1;
+                        method[22] = choice4 + choice3 + choice1 + choice2;
+                        method[23] = choice4 + choice3 + choice2 + choice1;
+                        // finished 24-ele method for each chosen 4 chars
+                        for (int n = 0; n < 24; n++) {
+                            String sorted;
+                            sorted = canonicalString(Mask.maskString(method[n], in));
+                            if (sorted.equals(s)){
+                                char[] chars = new char[4];
+                                chars[0] = method[n].charAt(0);
+                                chars[1] = method[n].charAt(1);
+                                chars[2] = method[n].charAt(2);
+                                chars[3] = method[n].charAt(3);
+                                // We notice that mask Z and mask Y is symmetric so there exist duplicates in the character-string presenting.
+                                // For instance,
+                                // a four-char string "OFIA" represents the same solution with what "OFKA", "OFIC", "OFKC" do.
+                                // Similarly, a four-char string "JMEB" represents the same solution with what "JMGB", "JMED", "JMGD" do.
+                                // Generally , N/P, J/L, F/H, B/D, M/O, I/K, E/G, A/C can be replaced by their counterpart in each pair respectively,
+                                // For the place whose index is 2 (represents mask Y) or 3 (represents mask Y) in the 4-char string
+                                switch (chars[2]){
+                                    case 'D': chars[2] ='B';break;
+                                    case 'C': chars[2] ='A';break;
+                                    case 'G': chars[2] ='E';break;
+                                    case 'K': chars[2] ='I';break;
+                                    case 'O': chars[2] ='M';break;
+                                    case 'H': chars[2] ='F';break;
+                                    case 'L': chars[2] ='J';break;
+                                    case 'P': chars[2] ='N';break;
+                                }
+                                switch (chars[3]) {
+                                    case 'D': chars[3] ='B';break;
+                                    case 'C': chars[3] ='A';break;
+                                    case 'G': chars[3] ='E';break;
+                                    case 'K': chars[3] ='I';break;
+                                    case 'O': chars[3] ='M';break;
+                                    case 'H': chars[3] ='F';break;
+                                    case 'L': chars[3] ='J';break;
+                                    case 'P': chars[3] ='N';break;
+                                }
+                                String same = new String(chars);
+                                if (!ans.contains(same)) ans.add(method[n]);
+                            }//https://stackoverflow.com/questions/224311/cleanest-way-to-toggle-a-boolean-variable-in-java
+                        }//https://stackoverflow.com/questions/15039519/how-to-dynamically-add-elements-to-string-array
+                    }
+                }
+            }
+        }
+        //System.out.println(ans);
+        String[] stringArray = ans.toArray(new String[ans.size()]);
+        Arrays.sort(stringArray);
+        return stringArray;}
+
+
 
 
     /** @return the objective of the current game. */
@@ -203,7 +474,7 @@ public class Hide {
     public static String canonicalString(String in) { //FIXME TASK 2 -- DONE
         //Scanner input = new Scanner(System.in);
         String r = "";
-        for (int i = 0; i < in.length();i ++){
+        for (int i = 0; i < in.length(); i++) {
             if (in.charAt(i) != '.') r += in.charAt(i);
         }
         char[] chars = r.toCharArray();
@@ -211,6 +482,11 @@ public class Hide {
         //String sorted = new String(chars);
         return new String(chars);
     }
+
+
+
+
+
 
 
     /**
@@ -315,7 +591,6 @@ public class Hide {
         String[] stringArray = ans.toArray(new String[ans.size()]);
         Arrays.sort(stringArray);
         return stringArray;}
-
 
     /**
      * Return the solution to the game.  The solution is calculated lazily, so first
