@@ -8,8 +8,8 @@ Your assignment **will not** be marked unless you have completed this statement.
 I declare that the work I have submitted for assignment one is entirely my own work, with the following documented exceptions:
 
 * The idea of <how to classify the mask positions in class Mask> came from a discussion with <Wenjun Yang u6251843> and <Ziyang Liu u6210090>
-* The idea of <how to replace the masked position in class Mask> came from a discussion with <Zhiyi Wang u5728807>
 * The idea of <how to list all the combinations in class Hide> came from a discussion with <Wenjun Yang u6251843>
+* The idea of <how to replace the masked position in class Mask> came from a discussion with <Zhiyi Wang u5728807>
 * The idea of <how to generate all the correct objectives in class Hide> came from a discussion with <Zhiyi Wang u5728807 and Wenjun Yang u6251843>
 
 * The code in class <Hide> uses an idea suggested by <https://stackoverflow.com/questions/605891/sort-a-single-string-in-java>
